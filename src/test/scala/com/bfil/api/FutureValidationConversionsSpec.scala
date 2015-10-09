@@ -73,10 +73,47 @@ class FutureValidationConversionsSpec extends Specification with AwaitableFuture
     implicit def apiResultToAnotherApiResult[T](result: ApiResult[T]): AnotherApiResult[T] = result leftMap {
       error => AnotherApiError(error.message)
     }
+    
+    type SimpleResult[T] = FutureValidation[String, T] 
+    implicit def apiResultToSimpleResult[T](result: ApiResult[T]):SimpleResult[T] = result leftMap {
+      error => error.message
+    }
+    
+    "convertTo" should {
+
+      "convert between 2 defined apis using an implicit conversions" in new ApiScope {
+
+        val simpleActual = service.respondWith("hello").convertTo[SimpleResult]
+        val anotherActual = service.respondWith("hello").convertTo[AnotherApiResult]
+
+        simpleActual.await.result === "hello"
+        anotherActual.await.result === "hello"
+        
+        val simpleActualFailure = service.failWith(error).convertTo[SimpleResult]
+        val anotherActualFailure = service.failWith(error).convertTo[AnotherApiResult]
+        
+        simpleActualFailure.await.error === "An error occurred"
+        anotherActualFailure.await.error === AnotherApiError("An error occurred")
+
+      }
+    }
+    
+    "convertAndMap" should {
+
+      "convert and map 2 defined apis using an implicit conversions" in new ApiScope {
+
+        val actual: AnotherApiResult[Option[String]] = service.respondWith("hello") convertAndMap { x =>
+          Some(x)
+        }
+
+        actual.await.result === Some("hello")
+
+      }
+    }
 
     "convertAndFlatMap" should {
 
-      "flatMap between 2 defined apis if an implicit conversions between the 2 is in scope" in new ApiScope {
+      "convert and flatMap 2 defined apis using an implicit conversions" in new ApiScope {
 
         val actual = service.respondWith("hello") convertAndFlatMap { x =>
           anotherService.respondWith(s"$x world")
