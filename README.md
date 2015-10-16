@@ -338,7 +338,7 @@ package object db extends TypedFutureValidationMonoidInstances[DatabaseError] {
 }
 ```
 
-Please note a zero/identity value should be provided, having the instance in scope would allow the use of contitions or destructuring in for comprehensions. The `append` method can also be overridden if needed, by default it always uses the first semigroup.
+Please note a zero/identity value should be provided, having the instance in scope would allow the use of if conditions or destructuring in for comprehensions. The `append` method can also be overridden if needed, by default it always uses the first semigroup.
 
 #### All instances
 
