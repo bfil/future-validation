@@ -77,6 +77,8 @@ object FutureValidation {
 
   def apply[F, S](inner: Future[Validation[F, S]]): FutureValidation[F, S] = new FutureValidation[F, S](inner)
 
+  def apply[F, S](inner: Validation[F, S]): FutureValidation[F, S] = FutureValidation(Future.successful(inner))
+
   def apply[F, S](inner: => Future[S])(implicit ec: ExecutionContext): FutureValidation[F, S] = FutureValidation(inner map Validation.success)
 
   def success[F, S](s: S): FutureValidation[F, S] = FutureValidation(Future.successful(Validation.success(s)))

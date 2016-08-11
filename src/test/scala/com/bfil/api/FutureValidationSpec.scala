@@ -50,6 +50,16 @@ class FutureValidationSpec extends Specification with Mockito with AwaitableFutu
 
       }
 
+      "create a future validation from a validation" in new ApiScope {
+
+        val actual = ApiResult {
+          Validation.success("hello")
+        }
+
+        actual.await.result must beEqualTo("hello")
+
+      }
+
       "create a future validation from a future that contains a validation" in new ApiScope {
 
         val actual = ApiResult {

@@ -8,6 +8,8 @@ trait TypedFutureValidation[F] {
 
   def apply[S](inner: Future[Validation[F, S]])(implicit ec: ExecutionContext): FutureValidation[F, S] = FutureValidation(inner)
 
+  def apply[S](inner: Validation[F, S])(implicit ec: ExecutionContext): FutureValidation[F, S] = FutureValidation(Future.successful(inner))
+
   def apply[S](inner: => Future[S])(implicit ec: ExecutionContext): FutureValidation[F, S] = FutureValidation(inner)
 
   def success[S](s: S): FutureValidation[F, S] = FutureValidation.success(s)

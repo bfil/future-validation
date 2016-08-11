@@ -15,6 +15,9 @@ trait SealedFutureValidation[F] extends TypedFutureValidation[F] {
   override def apply[S](inner: Future[Validation[F, S]])(implicit ec: ExecutionContext): FutureValidation[F, S] =
     super.apply(inner) recover exceptionHandler[S]
 
+  override def apply[S](inner: Validation[F, S])(implicit ec: ExecutionContext): FutureValidation[F, S] =
+    super.apply(inner) recover exceptionHandler[S]
+
   override def apply[S](inner: => Future[S])(implicit ec: ExecutionContext): FutureValidation[F, S] =
     super.apply(inner) recover exceptionHandler[S]
 
