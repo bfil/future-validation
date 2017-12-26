@@ -1,4 +1,4 @@
-package com.bfil.api
+package io.bfil.api
 
 import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -9,7 +9,7 @@ import org.specs2.mock.Mockito
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-import com.bfil.api.TestApi.ApiResult
+import io.bfil.api.TestApi.ApiResult
 
 import TestApi.ApiResult
 import scalaz._

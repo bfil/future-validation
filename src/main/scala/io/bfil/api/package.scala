@@ -1,6 +1,6 @@
-package com.bfil
+package io.bfil
 
-import com.bfil.api.FutureValidation
+import io.bfil.api.FutureValidation
 
 import scalaz._
 

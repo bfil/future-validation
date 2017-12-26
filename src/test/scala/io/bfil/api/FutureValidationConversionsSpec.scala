@@ -1,4 +1,4 @@
-package com.bfil.api
+package io.bfil.api
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -6,7 +6,7 @@ import scala.concurrent.Future
 import org.specs2.mutable.Specification
 import org.specs2.specification.Scope
 
-import com.bfil.api.TestApi.ApiResult
+import io.bfil.api.TestApi.ApiResult
 
 import scalaz._
 

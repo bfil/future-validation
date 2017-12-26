@@ -1,4 +1,4 @@
-package com.bfil.api
+package io.bfil.api
 
 import scala.concurrent.Await
 import scala.concurrent.duration.{ DurationInt, FiniteDuration }

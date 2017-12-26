@@ -1,4 +1,4 @@
-package com.bfil.api
+package io.bfil.api
 
 import scala.concurrent.{ ExecutionContext, Future }
 

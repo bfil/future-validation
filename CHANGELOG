@@ -1,3 +1,10 @@
+Version 0.3.0 (2017-12-26)
+--------------------------
+- renamed organization and packages from com.bfil to io.bfil
+- published the library to Bintray
+- updated scalaz to 7.2.18
+
+
 Version 0.2.0 (2015-10-09)
 --------------------------
 - added convertTo and convertAndMap methods to FutureValidationConversions
